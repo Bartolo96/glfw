@@ -101,3 +101,6 @@ tests/triangle-vulkan
 tests/window
 tests/windows
 
+#Per polloengine
+bin
+bin-int
