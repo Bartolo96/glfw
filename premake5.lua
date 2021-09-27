@@ -5,6 +5,8 @@ project "glfw"
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
+	staticruntime "on"
+	
 	files
 	{
         "include/GLFW/glfw3.h",
@@ -18,10 +20,8 @@ project "glfw"
         "src/window.c"
     }
 
-	filter "system:windows"
-        buildoptions { "-std=c11", "-lgdi32" }
+	filter "system:windows" 
         systemversion "latest"
-        staticruntime "On"
 
         files
         {
@@ -40,6 +40,12 @@ project "glfw"
 		{ 
             "_GLFW_WIN32",
             "_CRT_SECURE_NO_WARNINGS"
-		}
-    filter { "system:windows", "configurations:Release" }
-        buildoptions "/MT"
+		} 
+
+	filter "configurations:Debug" 
+		runtime "Debug"
+		symbols "on"
+
+	filter "configurations:Release" 
+		runtime "Release"
+		symbols "on"
